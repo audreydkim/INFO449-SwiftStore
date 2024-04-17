@@ -34,19 +34,17 @@ let yuh = Item(name: "Beans", priceEach: 499)
 // Implement an items method that returns the list of SKUs that were scanned.
 // Implement an output method to print out all of the items stored on the Receipt.
 class Receipt {
-    var runAmount : Int = 0
-    var list : [SKU]
+    var runAmount : Int = 0 // this might not be necessary
+    var list : [SKU] = []
     func items() -> [SKU] {
         return list
     }
-    func output() {
-        print(list)
+    func output() -> String {
+        return "\(list)"
     }
     func total() -> Int {
+        // create for loop that parses  through array and collects running price
         return runAmount
-    }
-    init(Item) {
-        
     }
 }
 
@@ -55,12 +53,12 @@ class Receipt {
 // Implement a subtotal method that returns the current total for all the items on the Receipt.
 // Implmement a total method that returns the Receipt (which contains all the items scanned), and clears its state to start a new Receipt. (In other words, subtotal displays the price along the way, whereas total is the finished transaction.)
 class Register {
-    var rec = Receipt(yuh)
+    var rec = Receipt()
     func subtotal() -> Int {
         return rec.total()
     }
     func total() -> Receipt {
-        return rec.total()
+        return rec
     }
     func scan(_ item : SKU) {
         rec.list.append(item)
