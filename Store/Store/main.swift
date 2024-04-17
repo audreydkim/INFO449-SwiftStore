@@ -6,8 +6,6 @@
 //
 
 import Foundation
-var list: [String: Int]
-var amount: Int
 //  It should require a property name that retrieves the name of the item, and a method price that returns the price (as an Int, in USD pennies).
 protocol SKU {
     var name : String { get }
@@ -36,14 +34,19 @@ let yuh = Item(name: "Beans", priceEach: 499)
 // Implement an items method that returns the list of SKUs that were scanned.
 // Implement an output method to print out all of the items stored on the Receipt.
 class Receipt {
-    func items() -> [String: Int] {
-        
+    var runAmount : Int = 0
+    var list : [SKU]
+    func items() -> [SKU] {
+        return list
     }
     func output() {
-        print("dumb bitch")
+        print(list)
     }
     func total() -> Int {
-        return amount
+        return runAmount
+    }
+    init(Item) {
+        
     }
 }
 
@@ -52,16 +55,15 @@ class Receipt {
 // Implement a subtotal method that returns the current total for all the items on the Receipt.
 // Implmement a total method that returns the Receipt (which contains all the items scanned), and clears its state to start a new Receipt. (In other words, subtotal displays the price along the way, whereas total is the finished transaction.)
 class Register {
-    var rec = Receipt()
-    var runAmount = 0
+    var rec = Receipt(yuh)
     func subtotal() -> Int {
-        return runAmount
+        return rec.total()
     }
     func total() -> Receipt {
-        return rec
+        return rec.total()
     }
-    func scan(_: Item) {
-        
+    func scan(_ item : SKU) {
+        rec.list.append(item)
     }
 }
 
