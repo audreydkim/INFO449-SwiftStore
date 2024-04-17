@@ -6,14 +6,64 @@
 //
 
 import Foundation
+var list: [String: Int]
+var amount: Int
+//  It should require a property name that retrieves the name of the item, and a method price that returns the price (as an Int, in USD pennies).
+protocol SKU {
+    var name : String { get }
+    func price() -> Int
+}
 
-protocol SKU {}
+// Create a class Item that implements SKU and uses a price-per-item pricing scheme. That is to say, a $4.99 can of beans (an Item("Beans", 499)) or a $.99 pencil (a Item("Pencil", 99)).
+// Create a unit test that tests adding a single Item to the Register and displays its subtotal (which should be the single Item's price).
+class Item : SKU {
+    var name : String
+    var priceEach : Int
+    
+    init(name : String, priceEach: Int) {
+        self.name = name
+        self.priceEach = priceEach
+    }
+    
+    func price() -> Int {
+        return priceEach
+    }
+}
 
-class Item {}
+let yuh = Item(name: "Beans", priceEach: 499)
 
-class Receipt {}
+// The Receipt is a list of the entire transaction.
+// Implement an items method that returns the list of SKUs that were scanned.
+// Implement an output method to print out all of the items stored on the Receipt.
+class Receipt {
+    func items() -> [String: Int] {
+        
+    }
+    func output() {
+        print("dumb bitch")
+    }
+    func total() -> Int {
+        return amount
+    }
+}
 
-class Register {}
+// When a Register is created, have it create a Receipt on which to capture all the items scanned.
+// The Register is responsible for displaying the total along the way
+// Implement a subtotal method that returns the current total for all the items on the Receipt.
+// Implmement a total method that returns the Receipt (which contains all the items scanned), and clears its state to start a new Receipt. (In other words, subtotal displays the price along the way, whereas total is the finished transaction.)
+class Register {
+    var rec = Receipt()
+    var runAmount = 0
+    func subtotal() -> Int {
+        return runAmount
+    }
+    func total() -> Receipt {
+        return rec
+    }
+    func scan(_: Item) {
+        
+    }
+}
 
 class Store {
     let version = "0.1"
@@ -22,3 +72,4 @@ class Store {
     }
 }
 
+// unit tests
